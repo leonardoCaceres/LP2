@@ -13,9 +13,16 @@ public class Automovel {
 	}
 
 	public void acelerar(int aceleracao) throws AcimaVelocidadeException {
+		if(velocidadeAtual + aceleracao > velocidadeMaxima) {
+			throw new AcimaVelocidadeException("Excedeu a velocidade máxima!");
+		}
+		else {
+			velocidadeAtual += aceleracao;
+		}
+		/*
 		try {
 			if(velocidadeAtual + aceleracao > velocidadeMaxima) {
-				throw new AcimaVelocidadeException();
+				throw new AcimaVelocidadeException("Excedeu a velocidade máxima!");
 			}
 			else {
 				velocidadeAtual += aceleracao;
@@ -23,10 +30,10 @@ public class Automovel {
 		}
 		catch(AcimaVelocidadeException exc) {
 			throw new AcimaVelocidadeException("Excedeu a velocidade máxima!");
-			//System.out.println("Excedeu a velocidade máxima!");
 		}
 		finally {
 			
 		}
+		*/
 	}
 }
