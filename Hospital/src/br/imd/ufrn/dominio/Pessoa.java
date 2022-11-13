@@ -6,6 +6,7 @@ public class Pessoa {
 	String nome;
 	double cpf;
 	double telefone;
-	String senha;
+	int login;
+	int senha;
 	LocalDate dataNascimento;
 }

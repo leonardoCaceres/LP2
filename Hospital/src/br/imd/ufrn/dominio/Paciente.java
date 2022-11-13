@@ -27,10 +27,10 @@ public class Paciente extends Pessoa{
 	public LocalDate getdDataNascimento() {
 		return this.dataNascimento;
 	}
-	public void setSenha(String senha) {
+	public void setSenha(int senha) {
 		this.senha = senha;
 	}
-	public String getSenha() {
+	public int getSenha() {
 		return senha;
 	}
 	public String getEndereco() {

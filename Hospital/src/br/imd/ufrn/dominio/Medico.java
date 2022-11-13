@@ -1,12 +1,11 @@
 package br.imd.ufrn.dominio;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Medico extends Pessoa{
 	int CRM;
 	String especialidade;
-	private int login;
-	private String senha;
 	
 	private ArrayList<Paciente> pacientesAcompanhados = new ArrayList<Paciente>();
 	
@@ -28,10 +27,10 @@ public class Medico extends Pessoa{
 	public void setLogin(int login) {
 		this.login = login;
 	}
-	public String getSenha() {
+	public int getSenha() {
 		return senha;
 	}
-	public void setSenha(String senha) {
+	public void setSenha(int senha) {
 		this.senha = senha;
 	}
 	public ArrayList<Paciente> getPacientesAcompanhados() {
@@ -42,6 +41,10 @@ public class Medico extends Pessoa{
 	}
 	
 	public Medico() {
-		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Escolha o login:");
+		this.login = sc.nextInt();
+		System.out.println("Escolha a senha:");
+		this.senha = sc.nextInt();
 	}
 }
