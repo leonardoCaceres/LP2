@@ -40,7 +40,7 @@ public class HospitalVisao {
 					}
 				}
 				else if(tipoDeBusca == 2) {
-					if(sc.next() == paciente.getCPF()){
+					if( sc.next().equals(paciente.getCPF()) ){
 						return paciente;
 					}
 				}
@@ -215,6 +215,7 @@ public class HospitalVisao {
 			entrada = sc.nextInt();
 			if(entrada == 1) {
 				pacienteVision(pacientes);
+				System.out.println(pacientes);
 			}
 			else if(entrada == 2) {
 				
@@ -240,7 +241,7 @@ public class HospitalVisao {
 						}
 					}
 					if(!entrou) {
-						System.out.println("Nenhum médico encontrado!");
+						System.out.println("Combinação de senha e Login apresentados não encontrada!");
 					}
 				}
 				else if(entrada == 2) {

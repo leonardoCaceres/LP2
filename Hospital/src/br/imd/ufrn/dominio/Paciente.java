@@ -115,6 +115,6 @@ public class Paciente extends Pessoa{
 	}
 	
 	public String dadosImportantes() {
-		return "";
+		return getNome();
 	}
 }
