@@ -106,7 +106,8 @@ public class HospitalVisao {
 		
 		while(continuar) {
 			System.out.println("Usuário já é cadastrado(a)?");
-			System.out.println("Responda com S ou N");
+			System.out.println("Responda com S/s ou N/n");
+			System.out.println("Responda Sair ou sair para sair");
 			acao = sc.next();
 			if(acao.equals("N")) {
 				boolean realizarCadastro = false;
@@ -175,6 +176,11 @@ public class HospitalVisao {
 							else if(motivo == 3) {
 								
 							}
+							else if(motivo == 4) {
+								System.out.println("Retornando ao menu!");
+								escolha = "N";
+								break;
+							}
 							else {
 								System.out.println("Verifique a entrada digitada!");
 								System.out.println("Tente Novamente");
@@ -183,11 +189,14 @@ public class HospitalVisao {
 					}
 				}
 			}
+			else if(acao.equals("Sair") || acao.equals("sair") ) {
+				continuar = false;
+				System.out.println("Retornando ao menu principal!");
+			}
 			else {
 				System.out.println("Verifique a entrada digitada!");
 			}
 		}
-		sc.close();
 	}
 	
 	public static void main(String[] args) {
