@@ -46,5 +46,7 @@ public class Medico extends Pessoa{
 		this.login = sc.nextInt();
 		System.out.println("Escolha a senha:");
 		this.senha = sc.nextInt();
+		
+		sc.close();
 	}
 }

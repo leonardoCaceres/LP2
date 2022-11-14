@@ -2,17 +2,22 @@ package br.imd.ufrn.dominio;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Paciente extends Pessoa{
 	private String endereco;
 	private double numeroSUS;
 	private ArrayList<String> remedio = new ArrayList<String>();
 	private Historico historicoDoPaciente;
+	private String prioridade;
+	private String sintomas;
+	private String sexo;
+	private ArrayList<String> exames = new ArrayList<String>();
 	
-	public void setCPF(double cpf) {
+	public void setCPF(String cpf) {
 		this.cpf = cpf;
 	}
-	public double getCPF() {
+	public String getCPF() {
 		return this.cpf;
 	}
 	public void setTelefone(double telefone) {
@@ -21,7 +26,13 @@ public class Paciente extends Pessoa{
 	public double getTelefone() {
 		return this.telefone;
 	}
-	public void setNome(LocalDate dataNascimento) {
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getNome() {
+		return this.nome;
+	}
+	public void getdDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 	public LocalDate getdDataNascimento() {
@@ -57,8 +68,53 @@ public class Paciente extends Pessoa{
 	public void setHistoricoDoPaciente(Historico historicoDoPaciente) {
 		this.historicoDoPaciente = historicoDoPaciente;
 	}
-
+	public String getSintomas() {
+		return sintomas;
+	}
+	public void setSintomas(String sintomas) {
+		sintomas = sintomas;
+	}
+	public String getPrioridade() {
+		return prioridade;
+	}
+	public void setPrioridade(String prioridade) {
+		prioridade = prioridade;
+	}
+	public String getSexo() {
+		return sexo;
+	}
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+	public ArrayList<String> getExames() {
+		return exames;
+	}
+	public void setExames(ArrayList<String> exames) {
+		this.exames = exames;
+	}
+	
 	public String toString() {
 		return "Hey";
+	}
+	
+	public void consulta() {
+		
+	}
+	
+	public Paciente() {
+		Scanner sca = new Scanner(System.in);
+		System.out.println("Nome:");
+		setNome(sca.next());
+		System.out.println("CPF:");
+		setCPF(sca.next());
+		System.out.println("Sexo:");
+		setSexo(sca.next());
+		
+		
+		//sca.close();
+	}
+	
+	public String dadosImportantes() {
+		return "";
 	}
 }
