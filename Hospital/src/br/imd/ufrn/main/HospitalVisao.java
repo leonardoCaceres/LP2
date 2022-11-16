@@ -72,6 +72,7 @@ public class HospitalVisao {
 			return saida;
 		}
 	}
+
 	public static Paciente buscaPaciente(ArrayList<Paciente> pacientes) {
 		int tipoDeBusca;
 		System.out.println("--------------------------------------------------------");
@@ -126,7 +127,7 @@ public class HospitalVisao {
 			System.out.println("2.Atender paciente");
 			System.out.println("3.Requisição de exames");
 			System.out.println("4.Sair");
-			System.out.println(retornePrioridades(pacientes));
+			System.out.println(retornePrioridades(pacientes) != "");
 			System.out.println("--------------------------------------------------------");
 			
 			acao = sc.nextInt();
@@ -390,23 +391,3 @@ public class HospitalVisao {
 		sc.close();
 	}
 }
-/*
-try {
-	double cpfDeEntrada;
-	String senhaDeEntrada;
-	
-	System.out.println("Digite o CPF");
-	cpfDeEntrada = sc.nextDouble();
-	System.out.println("Digite o SENHA");
-	senhaDeEntrada = sc.next();
-}
-//catch {
-	
-//}
-finally {
-	
-}
-*/
-
-//Paciente pacienteZero = new Paciente();
-//System.out.println(pacienteZero);
