@@ -1,6 +1,7 @@
 package br.imd.ufrn.main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import br.imd.ufrn.dominio.Paciente;
@@ -9,7 +10,17 @@ import br.imd.ufrn.dominio.Medico;
 
 public class HospitalVisao {
 	static Scanner sc = new Scanner(System.in);
-
+	
+	//modificar a prioridade com auxilio do tempo
+	public static Paciente buscaPacientePorPrioridade(ArrayList<Paciente> pacientes, String prioridade) {
+		for(Paciente paciente : pacientes)  {
+			if( prioridade.equals(paciente.getCPF()) ){
+				return paciente;
+			}
+		}
+		return null;
+	}
+	
 	public static Paciente buscaPacientePorCPF(ArrayList<Paciente> pacientes, String CPF) {
 		for(Paciente paciente : pacientes) {
 			if( CPF.equals(paciente.getCPF()) ){
@@ -19,6 +30,48 @@ public class HospitalVisao {
 		return null;
 	}
 	
+	public static String retornePrioridades(ArrayList<Paciente> pacientes){
+		ArrayList<Integer> vetorDePrioridades = new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0));
+		for(Paciente paciente : pacientes) {
+			if ("azul".equals(paciente.getCPF())) {
+				vetorDePrioridades.set(0, vetorDePrioridades.get(0)+1);
+			}
+			else if ("verde".equals(paciente.getCPF())) {
+				vetorDePrioridades.set(1, vetorDePrioridades.get(1)+1);
+			}
+			else if ("amarelo".equals(paciente.getCPF())) {
+				vetorDePrioridades.set(2, vetorDePrioridades.get(2)+1);
+			}
+			else if( "vermelho".equals(paciente.getCPF()) ){
+				vetorDePrioridades.set(3, vetorDePrioridades.get(3)+1);
+			}
+		}
+		int cont = 0;
+		String saida = "Número de pacientes por prioridade", saidaVazia = saida;
+		for(Integer cor : vetorDePrioridades) {
+			if(cor != 0) {
+				if(cont == 0) {
+					saida += " Azul: " + cor;
+				}
+				else if(cont == 1) {
+					saida += " Verde: " + cor;
+				}
+				else if(cont == 2) {
+					saida += " Amarelo: " + cor;
+				}
+				else if(cont == 3) {
+					saida += " Vermelho: " + cor;
+				}
+			}
+			cont++;
+		}
+		if(saida == saidaVazia) {
+			return "Nenhum paciente";
+		}
+		else {
+			return saida;
+		}
+	}
 	public static Paciente buscaPaciente(ArrayList<Paciente> pacientes) {
 		int tipoDeBusca;
 		System.out.println("--------------------------------------------------------");
@@ -67,12 +120,13 @@ public class HospitalVisao {
 		int acao = -1;
 		while(acao != 4) {
 			System.out.println("--------------------------------------------------------");
-			System.out.println("Olá, seja bem vindo ao Sistema Hospitalar Online (SHO).");
+			System.out.println("Olá, Dr(a)." + medico.getNome() +  " bem vindo ao Sistema Hospitalar Online (SHO).");
 			System.out.println("Escolha uma ação:");
 			System.out.println("1.Consultar paciente");
-			System.out.println("2.Adicionar paciente");
+			System.out.println("2.Atender paciente");
 			System.out.println("3.Requisição de exames");
 			System.out.println("4.Sair");
+			System.out.println();
 			System.out.println("--------------------------------------------------------");
 			
 			acao = sc.nextInt();
@@ -106,12 +160,42 @@ public class HospitalVisao {
 	}
 	
 	public static void enfermeiraVision(Enfermeira enfermeira, ArrayList<Paciente> pacientes) {
-		System.out.println("|--------------------------------------------------------|");
-		System.out.println("Escolha uma ação:");
-		System.out.println("1.Cadastrar paciente");
-		System.out.println("2.Modificar atributos do paciente");
-		System.out.println("3.Médico");
-		System.out.println("|--------------------------------------------------------|");
+		boolean continua = true;
+		while(continua) {
+			System.out.println("|--------------------------------------------------------|");
+			System.out.println("Escolha uma ação:");
+			System.out.println("1.Atender paciente");
+			System.out.println("2.Modificar atributos do paciente");
+			System.out.println("3.Sair");
+			System.out.println("|--------------------------------------------------------|");
+			int acao = -1;
+			if(acao == 1) {
+				Paciente paciente = buscaPaciente(pacientes);
+				
+				if(paciente != null) {
+					System.out.println(paciente.dadosImportantes());
+				}
+				else {
+					System.out.println("Paciente não encontrado!");
+				}
+			}
+			else if(acao == 2) {
+				
+				for(Paciente paciente : pacientes) {
+					if( sc.nextDouble() == paciente.getNumeroSUS()){
+						
+					}else {
+						pacientes.add(paciente);
+					}
+				}
+			}
+			else if(acao == 3) {
+							
+			}
+			else {
+				System.out.println("Verifique a entrada digitada!");
+			}
+		}
 	}
 	
 	public static void pacienteVision(ArrayList<Paciente> pacientes) {
@@ -161,7 +245,7 @@ public class HospitalVisao {
 								escolha = "N";
 								break;
 							}
-							else if(novaEscolha.equals("S")||novaEscolha.equals("S")||novaEscolha.equals("Sim")||novaEscolha.equals("sim")){
+							else if(novaEscolha.equals("S")||novaEscolha.equals("s")||novaEscolha.equals("Sim")||novaEscolha.equals("sim")){
 								break;
 							}
 							else {
@@ -231,7 +315,6 @@ public class HospitalVisao {
 			entrada = sc.nextInt();
 			if(entrada == 1) {
 				pacienteVision(pacientes);
-				System.out.println(pacientes);
 			}
 			else if(entrada == 2) {
 				System.out.println("|--------------------------------------------------------|");
@@ -239,9 +322,9 @@ public class HospitalVisao {
 				System.out.println("1.Entrar");
 				System.out.println("2.Cadastrar");
 				System.out.println("|--------------------------------------------------------|");
-				entrada = sc.nextInt();
+				int entradaEnf = sc.nextInt();
 				
-				if(entrada == 1) {
+				if(entradaEnf == 1) {
 					int login, senha;
 					boolean entrou = false;
 					System.out.println("Login:");
@@ -252,13 +335,13 @@ public class HospitalVisao {
 					for(Enfermeira enfermeira: enfermeiras) {
 						if(enfermeira.getSenha() == senha && enfermeira.getLogin() == login) {
 							entrou = true;
-							EnfermeiraVision(enfermeira, pacientes);
+							enfermeiraVision(enfermeira, pacientes);
 						}
 					}
 					if(!entrou) {
 						System.out.println("Combinação de senha e Login apresentados não encontrada!\n");
 					}
-				}else if(entrada == 2) {
+				}else if(entradaEnf == 2) {
 					Enfermeira enf = new Enfermeira();
 	 				enfermeiras.add(enf);
 				}else {

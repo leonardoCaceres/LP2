@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Paciente extends Pessoa{
-	private String endereco;
-	private double numeroSUS;
-	private ArrayList<String> remedio = new ArrayList<String>();
-	private Historico historicoDoPaciente;
-	private String prioridade;
-	private String sintomas;
-	private String sexo;
-	private ArrayList<String> exames = new ArrayList<String>();
+	protected String endereco;
+	protected double numeroSUS;
+	protected ArrayList<String> remedio = new ArrayList<String>();
+	protected Historico historicoDoPaciente;
+	protected String prioridade;
+	protected String sintomas;
+	protected String sexo;
+	protected ArrayList<String> exames = new ArrayList<String>();
 	
 	public void setCPF(String cpf) {
 		this.cpf = cpf;
@@ -25,12 +25,6 @@ public class Paciente extends Pessoa{
 	}
 	public double getTelefone() {
 		return this.telefone;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getNome() {
-		return this.nome;
 	}
 	public void getdDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;

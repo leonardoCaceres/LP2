@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Medico extends Pessoa{
-	int CRM;
-	String especialidade;
+	protected int CRM;
+	protected String especialidade;
 	
 	private ArrayList<Paciente> pacientesAcompanhados = new ArrayList<Paciente>();
 	
