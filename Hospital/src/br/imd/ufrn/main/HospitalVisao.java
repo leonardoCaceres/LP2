@@ -126,7 +126,7 @@ public class HospitalVisao {
 			System.out.println("2.Atender paciente");
 			System.out.println("3.Requisição de exames");
 			System.out.println("4.Sair");
-			System.out.println();
+			System.out.println(retornePrioridades(pacientes));
 			System.out.println("--------------------------------------------------------");
 			
 			acao = sc.nextInt();
@@ -168,7 +168,7 @@ public class HospitalVisao {
 			System.out.println("2.Modificar atributos do paciente");
 			System.out.println("3.Sair");
 			System.out.println("|--------------------------------------------------------|");
-			int acao = -1;
+			int acao = sc.nextInt();
 			if(acao == 1) {
 				Paciente paciente = buscaPaciente(pacientes);
 				
@@ -333,7 +333,7 @@ public class HospitalVisao {
 					senha = sc.nextInt();
 					
 					for(Enfermeira enfermeira: enfermeiras) {
-						if(enfermeira.getSenha() == senha && enfermeira.getLogin() == login) {
+						if(enfermeira.logar(login, senha)) {
 							entrou = true;
 							enfermeiraVision(enfermeira, pacientes);
 						}
@@ -365,7 +365,7 @@ public class HospitalVisao {
 					senha = sc.nextInt();
 					
 					for(Medico medico: medicos) {
-						if(medico.getSenha() == senha && medico.getLogin() == login) {
+						if(medico.logar(login, senha)) {
 							entrou = true;
 							medicoVision(medico, pacientes);
 						}

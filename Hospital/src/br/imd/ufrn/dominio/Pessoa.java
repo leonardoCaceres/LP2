@@ -17,7 +17,10 @@ public class Pessoa {
 		return this.nome;
 	}
 	
-	void logar(){
-		
+	public boolean logar(int loginDigitada, int senhaDigitada){
+		if(login == loginDigitada && senha == senhaDigitada) {
+			return true;
+		}
+		return false;
 	}
 }
