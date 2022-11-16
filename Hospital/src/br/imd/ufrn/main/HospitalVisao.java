@@ -21,11 +21,13 @@ public class HospitalVisao {
 	
 	public static Paciente buscaPaciente(ArrayList<Paciente> pacientes) {
 		int tipoDeBusca;
+		System.out.println("--------------------------------------------------------");
 		System.out.println("Escolha uma forma de busca:");
 		System.out.println("1.Consultar pelo nome");
 		System.out.println("2.Consultar pelo cpf");
 		System.out.println("3.Consultar pelo numero do SUS");
 		System.out.println("4.Voltar");
+		System.out.println("--------------------------------------------------------");
 		tipoDeBusca = sc.nextInt();
 
 		if(tipoDeBusca >= 1 && tipoDeBusca <= 3) {
@@ -64,12 +66,15 @@ public class HospitalVisao {
 	public static void medicoVision(Medico medico, ArrayList<Paciente> pacientes) {
 		int acao = -1;
 		while(acao != 4) {
+			System.out.println("--------------------------------------------------------");
+			System.out.println("Olá, seja bem vindo ao Sistema Hospitalar Online (SHO).");
 			System.out.println("Escolha uma ação:");
 			System.out.println("1.Consultar paciente");
 			System.out.println("2.Adicionar paciente");
 			System.out.println("3.Requisição de exames");
 			System.out.println("4.Sair");
-		
+			System.out.println("--------------------------------------------------------");
+			
 			acao = sc.nextInt();
 			if(acao == 1) {
 				Paciente paciente = buscaPaciente(pacientes);
@@ -83,6 +88,13 @@ public class HospitalVisao {
 			}
 			else if(acao == 2) {
 				
+				for(Paciente paciente : pacientes) {
+					if( sc.nextDouble() == paciente.getNumeroSUS()){
+						
+					}else {
+						pacientes.add(paciente);
+					}
+				}
 			}
 			else if(acao == 3) {
 							
@@ -94,10 +106,12 @@ public class HospitalVisao {
 	}
 	
 	public static void enfermeiraVision(Enfermeira enfermeira, ArrayList<Paciente> pacientes) {
+		System.out.println("|--------------------------------------------------------|");
 		System.out.println("Escolha uma ação:");
 		System.out.println("1.Cadastrar paciente");
 		System.out.println("2.Modificar atributos do paciente");
 		System.out.println("3.Médico");
+		System.out.println("|--------------------------------------------------------|");
 	}
 	
 	public static void pacienteVision(ArrayList<Paciente> pacientes) {
@@ -105,27 +119,25 @@ public class HospitalVisao {
 		String acao = "nothing";
 		
 		while(continuar) {
-			System.out.println("Usuário já é cadastrado(a)?");
-			System.out.println("Responda com S/s ou N/n");
-			System.out.println("Responda Sair ou sair para sair");
+			System.out.println("Olá, o usuário já é cadastrado(a)? Digite 'S'(Sim) ou 'N'(Não)");
+			System.out.println("Responda 'Sair' para sair");
 			acao = sc.next();
-			if(acao.equals("N")) {
+			if(acao.equals("N")||acao.equals("n")||acao.equals("Nao")||acao.equals("nao")) {
 				boolean realizarCadastro = false;
 				String cadastro = "nothing";
 				while(!realizarCadastro) {
-					System.out.println("Gostaria de realizar o cadastro?");
-					System.out.println("Digite S ou N");
+					System.out.println("Gostaria de realizar o cadastro? Digite 'S'(Sim) ou 'N'(Não)");
 					cadastro = sc.next();
-					if(cadastro.equals("S")) {
+					if(cadastro.equals("S")||cadastro.equals("s")||cadastro.equals("Sim")||cadastro.equals("sim")) {
 						System.out.println("Vamos realizar o cadastro!");
 						Paciente novoPaciente = new Paciente();
 						pacientes.add(novoPaciente);
-						System.out.println("Usuario de cpf: " + novoPaciente.getCPF() +
-								" foi cadastrado!");
-						System.out.println("Voltando ao menu!");
+						System.out.println("Usuario de CPF: " + novoPaciente.getCPF() +
+								" foi cadastrado!\n");
+						System.out.println("Voltando ao menu!\n");
 						realizarCadastro = true;
 					}
-					else if(cadastro.equals("N")) {
+					else if(cadastro.equals("N")||cadastro.equals("n")||cadastro.equals("Nao")||cadastro.equals("nao")) {
 						realizarCadastro = true;
 					}
 					else {
@@ -133,7 +145,7 @@ public class HospitalVisao {
 					}
 				}
 			}
-			else if(acao.equals("S")) {
+			else if(acao.equals("S")||acao.equals("s")||acao.equals("Sim")||acao.equals("sim")) {
 				String escolha = "nothing";
 				while(!escolha.equals("N")) {
 					System.out.println("Digite o seu CPF:");
@@ -142,30 +154,32 @@ public class HospitalVisao {
 						String novaEscolha = "nothing";
 						while(!novaEscolha.equals("S") && !novaEscolha.equals("N")) {
 							System.out.println("Usuário não encontrado!"
-									+ "\n" + "Gostaria de tentar novamente?");
-							System.out.println("Digite S ou N");
+									+ "\n" + "Gostaria de tentar novamente?\n");
+							System.out.println("Digite 'S'(Sim) ou 'N'(Não)");
 							novaEscolha = sc.next();
-							if(novaEscolha.equals("N")) {
+							if(novaEscolha.equals("N")||novaEscolha.equals("n")||novaEscolha.equals("nao")||novaEscolha.equals("Nao")) {
 								escolha = "N";
 								break;
 							}
-							else if(novaEscolha.equals("S")){
+							else if(novaEscolha.equals("S")||novaEscolha.equals("S")||novaEscolha.equals("Sim")||novaEscolha.equals("sim")){
 								break;
 							}
 							else {
 								System.out.println("Verifique a entrada digitada!");
-								System.out.println("Tente Novamente");
+								System.out.println("Tente Novamente\n");
 							}
 						}
 					}
 					else if(paciente != null){
 						int motivo = -1;
 						while(motivo != 4) {
-							System.out.println("Qual o motivo da sua visita sr(a) " + paciente.getNome());
+							System.out.println("|--------------------------------------------------------|");
+							System.out.println("Olá sr(a)"+ paciente.getNome() +", qual o motivo da sua visita?");
 							System.out.println("1.Retirar exames");
 							System.out.println("2.Nova consulta");
 							System.out.println("3.Finalização do tratamento");
 							System.out.println("4.Sair");
+							System.out.println("|--------------------------------------------------------|");
 							motivo = sc.nextInt();
 							if(motivo == 1) {
 								System.out.println(paciente.getExames());
@@ -177,7 +191,7 @@ public class HospitalVisao {
 								
 							}
 							else if(motivo == 4) {
-								System.out.println("Retornando ao menu!");
+								System.out.println("Retornando ao menu!\n");
 								escolha = "N";
 								break;
 							}
@@ -191,7 +205,7 @@ public class HospitalVisao {
 			}
 			else if(acao.equals("Sair") || acao.equals("sair") ) {
 				continuar = false;
-				System.out.println("Retornando ao menu principal!");
+				System.out.println("Retornando ao menu principal!\n");
 			}
 			else {
 				System.out.println("Verifique a entrada digitada!");
@@ -206,11 +220,13 @@ public class HospitalVisao {
 
 		int entrada = -1;
 		while(entrada != 4) {
+			System.out.println("|--------------------------------------------------------|");
 			System.out.println("Escolha o menu:");
 			System.out.println("1.Paciente");
 			System.out.println("2.Enfermeira");
 			System.out.println("3.Médico");
 			System.out.println("4.Sair");
+			System.out.println("|--------------------------------------------------------|");
 
 			entrada = sc.nextInt();
 			if(entrada == 1) {
@@ -218,12 +234,43 @@ public class HospitalVisao {
 				System.out.println(pacientes);
 			}
 			else if(entrada == 2) {
+				System.out.println("|--------------------------------------------------------|");
+				System.out.println("Menu de enfermeiro:");
+				System.out.println("1.Entrar");
+				System.out.println("2.Cadastrar");
+				System.out.println("|--------------------------------------------------------|");
+				entrada = sc.nextInt();
 				
+				if(entrada == 1) {
+					int login, senha;
+					boolean entrou = false;
+					System.out.println("Login:");
+					login = sc.nextInt();
+					System.out.println("Senha");
+					senha = sc.nextInt();
+					
+					for(Enfermeira enfermeira: enfermeiras) {
+						if(enfermeira.getSenha() == senha && enfermeira.getLogin() == login) {
+							entrou = true;
+							EnfermeiraVision(enfermeira, pacientes);
+						}
+					}
+					if(!entrou) {
+						System.out.println("Combinação de senha e Login apresentados não encontrada!\n");
+					}
+				}else if(entrada == 2) {
+					Enfermeira enf = new Enfermeira();
+	 				enfermeiras.add(enf);
+				}else {
+					System.out.println("Entrada Inválida");
+				}
 			}
 			else if(entrada == 3) {
+				System.out.println("|--------------------------------------------------------|");
 				System.out.println("Menu do médico:");
 				System.out.println("1.Entrar");
 				System.out.println("2.Cadastrar");
+				System.out.println("|--------------------------------------------------------|");
 				entrada = sc.nextInt();
 				
 				if(entrada == 1) {
@@ -241,7 +288,7 @@ public class HospitalVisao {
 						}
 					}
 					if(!entrou) {
-						System.out.println("Combinação de senha e Login apresentados não encontrada!");
+						System.out.println("Combinação de senha e Login apresentados não encontrada!\n");
 					}
 				}
 				else if(entrada == 2) {
