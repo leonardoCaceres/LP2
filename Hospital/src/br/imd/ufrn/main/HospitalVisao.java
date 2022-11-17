@@ -80,7 +80,7 @@ public class HospitalVisao {
 		System.out.println("Escolha uma forma de busca:");
 		System.out.println("1.Consultar pelo nome");
 		System.out.println("2.Consultar pelo cpf");
-		System.out.println("3.Consultar pela prioridade");
+		//System.out.println("3.Consultar pela prioridade");
 		System.out.println("4.Voltar");
 		System.out.println("--------------------------------------------------------");
 		tipoDeBusca = sc.nextInt();
@@ -135,15 +135,14 @@ public class HospitalVisao {
 			System.out.println("Escolha uma ação:");
 			System.out.println("1.Consultar paciente");
 			System.out.println("2.Atender paciente");
-			System.out.println("3.Requisição de exames");
+			System.out.println("3.Cadastrar exames");
 			System.out.println("4.Sair");
-			System.out.println();
+			//System.out.println();
 			System.out.println("--------------------------------------------------------");
 			
 			acao = sc.nextInt();
 			if(acao == 1) {
 				Paciente paciente = buscaPaciente(pacientes);
-				
 				if(paciente != null) {
 					System.out.println(paciente.dadosImportantes()+"\nHistórico: "+
 							"\nDoencas: "+paciente.getHistoricoDoPaciente().getDoencas()+
@@ -153,17 +152,23 @@ public class HospitalVisao {
 					System.out.println("Paciente não encontrado!");
 				}
 			}
-			else if(acao == 2) {	
-				//for(Paciente paciente : pacientes) {
+			else if(acao == 2) {
 				Paciente paciente = buscaPaciente(pacientes);
 				if( paciente != null && !paciente.getPrioridade().equals("")){
 					ArrayList<String> remedios = new ArrayList<String>();
-					for(String remedio: remedios) {
-						remedios.add(sc.next());
+					String entrada = "nothing";
+					while(!"finalizar".equals(entrada)) {
+						System.out.println("Indique os remedios passados:");
+						System.out.println("Digite 'finalizar' para sair!");
+						entrada = sc.next();
+						if("finalizar".equals(entrada)) {
+							break;
+						}
+						remedios.add(entrada);
 					}
-					paciente.setRemedio(remedios);
-					paciente.setPrioridade("");
-					//pacientes.remove(paciente);
+					paciente.setExames(remedios);
+					System.out.println("O paciente " + paciente.getNome() + " foi atendido!");
+					System.out.println("Foram passados os remédios " + paciente.getRemedio());
 				}
 				else if( !paciente.getPrioridade().equals("")){
 					System.out.println("Paciente ainda não passou pelo enfermeiro!");
@@ -172,10 +177,29 @@ public class HospitalVisao {
 					continue;
 				}
 			}else if(acao == 3) {
-				for(Paciente paciente : pacientes) {
-					//if( sc.nextDouble() == paciente.getNumeroSUS()){
-					//	System.out.println("Exames de "+ paciente.getNome()+ ": \n"+paciente.getExames());
-					//}
+				Paciente paciente = buscaPaciente(pacientes);
+				if( paciente != null && !paciente.getPrioridade().equals("")){
+					String entrada = "nothing";
+					ArrayList<String> exames = paciente.getExames();
+					while(!"finalizar".equals(entrada)) {
+						System.out.println("Indique os exames feitos:");
+						System.out.println("Digite 'finalizar' para sair!");
+						entrada = sc.next();
+						if("finalizar".equals(entrada)) {
+							break;
+						}
+						System.out.println("Resultado do exame:");
+						entrada += ", Resultado: " + sc.next();
+						exames.add(entrada);
+					}
+					paciente.setExames(exames);
+					System.out.println("Foram passados os exames " + paciente.getExames() + " para o paciente " + paciente.getNome());
+				}
+				else if( !paciente.getPrioridade().equals("")){
+					System.out.println("Paciente ainda não passou pelo enfermeiro!");
+				}
+				else {
+					continue;
 				}
 			}else if(acao == 4) {
 				break;
@@ -212,23 +236,33 @@ public class HospitalVisao {
 					System.out.println("Informe os sintomas do paciente: ");
 					novoPaciente.setSintomas(sc.next());
 					System.out.println("Digite qual a prioridade do paciente: ");
-					String cor = sc.next();
-					if( cores.contains(cor) ) {
-						//Arrays.asList(cores).contains(cor);
-						if(cor.equals("azul")) {
-							novoPaciente.setPrioridade("azul");
-						}
-						else if(cor.equals("verde")) {
-							novoPaciente.setPrioridade("verde");
-						}
-						else if(cor.equals("amarelo")) {
-							novoPaciente.setPrioridade("amarelo");
-						}
-						else if(cor.equals("vermelho")) {
-							novoPaciente.setPrioridade("vermelho");
+					String cor = "";
+					while(!cores.contains(cor)) {
+						cor = sc.next();
+						if( cores.contains(cor) ) {
+							if(cor.equals("azul")) {
+								novoPaciente.setPrioridade("azul");
+								System.out.println("A cor foi definida para");
+							}
+							else if(cor.equals("verde")) {
+								novoPaciente.setPrioridade("verde");
+							}
+							else if(cor.equals("amarelo")) {
+								novoPaciente.setPrioridade("amarelo");
+							}
+							else if(cor.equals("vermelho")) {
+								novoPaciente.setPrioridade("vermelho");
+							}
+							else {
+								System.out.println("Prioridade INVÁLIDA");
+							}
 						}
 						else {
-							System.out.println("Prioridade INVÁLIDA");
+							System.out.println("Entrada inválida");
+						}
+						if( cores.contains(novoPaciente.getPrioridade()) ) {
+							System.out.println("A prioridade do paciente " + novoPaciente.getNome() +
+									" foi definida para " + novoPaciente.getPrioridade() );
 						}
 					}
 				}
@@ -294,7 +328,9 @@ public class HospitalVisao {
 		String cpf = sc.next();
 		System.out.println("Sexo:");
 		String sexo = sc.next();
-		return new Paciente(nome, cpf, sexo);
+		System.out.println("Idade:");
+		String idade = sc.next();
+		return new Paciente(nome, cpf, sexo, idade);
 	}
 	
 	public static void pacienteVision(ArrayList<Paciente> pacientes) {
@@ -369,10 +405,16 @@ public class HospitalVisao {
 								}
 							}
 							else if(motivo == 2){
-								
+								System.out.println("Paciente solicitou atendimento");
+								paciente.setConsulta(true);
 							}
 							else if(motivo == 3) {
-								
+								if(paciente.getRemedio().size() == 0) {
+									System.out.println("Paciente não está tomando remédios");
+								}
+								else {
+									System.out.println("Paciente terminou o tratamento e não está mais tomando remédios");
+								}
 							}
 							else if(motivo == 4) {
 								System.out.println("Retornando ao menu!\n");

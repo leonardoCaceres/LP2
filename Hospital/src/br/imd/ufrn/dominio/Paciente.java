@@ -5,7 +5,7 @@ import java.time.Period;
 import java.util.ArrayList;
 
 public class Paciente extends Pessoa{
-	protected String endereco;
+	//protected String endereco;
 	//protected double numeroSUS;
 	protected ArrayList<String> remedio = new ArrayList<String>();
 	protected Historico historicoDoPaciente;
@@ -14,6 +14,7 @@ public class Paciente extends Pessoa{
 	protected String sexo;
 	protected ArrayList<String> exames = new ArrayList<String>();
 	protected String idade;
+	protected boolean Consulta = true;
 	
 	public String getIdade() {
 		return idade;
@@ -45,12 +46,12 @@ public class Paciente extends Pessoa{
 	public int getSenha() {
 		return senha;
 	}
-	public String getEndereco() {
-		return endereco;
-	}
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
+	//public String getEndereco() {
+	//	return endereco;
+	//}
+	//public void setEndereco(String endereco) {
+	//	this.endereco = endereco;
+	//}
 	//public double getNumeroSUS() {
 	//	return numeroSUS;
 	//}
@@ -98,15 +99,20 @@ public class Paciente extends Pessoa{
 		return "Hey";
 	}
 	
-	public void consulta() {
-		
+	public void setConsulta(boolean escolha) {
+		this.Consulta = escolha;
+	}
+	public boolean getConsulta() {
+		return this.Consulta;
 	}
 	
-	public Paciente(String nome, String cpf, String sexo) {
+	public Paciente(String nome, String cpf, String sexo, String idade) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.sexo = sexo;
+		this.idade = idade;
 		this.setHistoricoDoPaciente(new Historico());
+		this.setExames(new ArrayList<String>());
 		this.setPrioridade("");
 	}
 
