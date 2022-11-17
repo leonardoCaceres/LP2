@@ -12,8 +12,8 @@ public class Medico extends Pessoa{
 	public int getCRM() {
 		return CRM;
 	}
-	public void setCRM(int cRM) {
-		CRM = cRM;
+	public void setCRM(int crm) {
+		CRM = crm;
 	}
 	public String getEspecialidade() {
 		return especialidade;
@@ -40,13 +40,11 @@ public class Medico extends Pessoa{
 		this.pacientesAcompanhados = pacientesAcompanhados;
 	}
 	
-	public Medico() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Escolha o login:");
-		this.login = sc.nextInt();
-		System.out.println("Escolha a senha:");
-		this.senha = sc.nextInt();
-		
-		//sc.close();
+	public Medico(String nome, int crm, String especialidade, int login, int senha) {
+		this.nome = nome;
+		this.CRM = crm;
+		this.especialidade = especialidade;
+		this.login = login;
+		this.senha = senha;
 	}
 }

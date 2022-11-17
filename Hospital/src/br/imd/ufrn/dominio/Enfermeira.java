@@ -18,13 +18,11 @@ public class Enfermeira extends Pessoa{
 	public void setSenha(int senha) {
 		this.senha = senha;
 	}
-	public Enfermeira() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Escolha o login:");
-		this.login = sc.nextInt();
-		System.out.println("Escolha a senha:");
-		this.senha = sc.nextInt();
-		
-		//sc.close();
+	
+	public Enfermeira(String nome, int COREN, int login, int senha) {
+		this.nome = nome;
+		this.COREN = COREN;
+		this.login = login;
+		this.senha = senha;
 	}
 }

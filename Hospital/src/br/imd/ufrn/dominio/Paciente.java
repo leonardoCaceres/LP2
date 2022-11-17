@@ -1,6 +1,7 @@
 package br.imd.ufrn.dominio;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,7 +14,14 @@ public class Paciente extends Pessoa{
 	protected String sintomas;
 	protected String sexo;
 	protected ArrayList<String> exames = new ArrayList<String>();
+	protected String idade;
 	
+	public String getIdade() {
+		return idade;
+	}
+	public void setIdade(String idade) {
+		this.idade = calculoIdade(dataNascimento);
+	}
 	public void setCPF(String cpf) {
 		this.cpf = cpf;
 	}
@@ -103,12 +111,20 @@ public class Paciente extends Pessoa{
 		setCPF(sca.next());
 		System.out.println("Sexo:");
 		setSexo(sca.next());
-		
-		
+				
 		//sca.close();
 	}
-	
+	public static String calculoIdade(LocalDate dataNascimento) {
+        if ((dataNascimento != null) && (LocalDate.now() != null)) {
+        	String s=String.valueOf(Period.between(dataNascimento, LocalDate.now()).getYears());
+            return s;
+        }
+        else {
+            return "0";
+        }
+    }
 	public String dadosImportantes() {
-		return getNome();
+		return "Nome: "+ getNome() +"\nIdade: "+ getIdade() +" - Sexo: "+ getSexo()+
+				"\nSintomas: "+getSintomas();
 	}
 }
