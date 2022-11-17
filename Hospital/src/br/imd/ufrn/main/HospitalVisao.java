@@ -137,7 +137,6 @@ public class HospitalVisao {
 			System.out.println("2.Atender paciente");
 			System.out.println("3.Cadastrar exames");
 			System.out.println("4.Sair");
-			//System.out.println();
 			System.out.println("--------------------------------------------------------");
 			
 			acao = sc.nextInt();
@@ -170,13 +169,14 @@ public class HospitalVisao {
 					System.out.println("O paciente " + paciente.getNome() + " foi atendido!");
 					System.out.println("Foram passados os remédios " + paciente.getRemedio());
 				}
+				else if(paciente == null) {
+					continue;
+				}
 				else if( !paciente.getPrioridade().equals("")){
 					System.out.println("Paciente ainda não passou pelo enfermeiro!");
 				}
-				else {
-					continue;
-				}
-			}else if(acao == 3) {
+			}
+			else if(acao == 3) {
 				Paciente paciente = buscaPaciente(pacientes);
 				if( paciente != null && !paciente.getPrioridade().equals("")){
 					String entrada = "nothing";
@@ -195,11 +195,11 @@ public class HospitalVisao {
 					paciente.setExames(exames);
 					System.out.println("Foram passados os exames " + paciente.getExames() + " para o paciente " + paciente.getNome());
 				}
+				else if(paciente == null) {
+					continue;
+				}
 				else if( !paciente.getPrioridade().equals("")){
 					System.out.println("Paciente ainda não passou pelo enfermeiro!");
-				}
-				else {
-					continue;
 				}
 			}else if(acao == 4) {
 				break;
@@ -232,7 +232,7 @@ public class HospitalVisao {
 			int acao = sc.nextInt();
 			if(acao == 1) {
 				Paciente novoPaciente = buscaPaciente(pacientes);
-				if(novoPaciente != null) {
+				if(novoPaciente != null && novoPaciente.getConsulta()) {
 					System.out.println("Informe os sintomas do paciente: ");
 					novoPaciente.setSintomas(sc.next());
 					System.out.println("Digite qual a prioridade do paciente: ");
@@ -264,11 +264,18 @@ public class HospitalVisao {
 							System.out.println("A prioridade do paciente " + novoPaciente.getNome() +
 									" foi definida para " + novoPaciente.getPrioridade() );
 						}
+						System.out.println(novoPaciente.getPrioridade());
 					}
 				}
-				else {
+				else if(novoPaciente == null) {
 					System.out.println("Paciente não encontrado!");
 				}
+				else if(!novoPaciente.getConsulta()) {
+					System.out.println("Paciente já foi consultado!");
+				}
+				//else {
+				//	System.out.println("Paciente não encontrado!");
+				//}
 			}
 			else if(acao == 2) {
 				Paciente novoPaciente = buscaPaciente(pacientes);
@@ -405,7 +412,7 @@ public class HospitalVisao {
 								}
 							}
 							else if(motivo == 2){
-								System.out.println("Paciente solicitou atendimento");
+								System.out.println("Paciente " + paciente.getNome() + " solicitou atendimento");
 								paciente.setConsulta(true);
 							}
 							else if(motivo == 3) {
