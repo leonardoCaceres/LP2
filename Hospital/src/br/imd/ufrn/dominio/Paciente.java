@@ -3,11 +3,10 @@ package br.imd.ufrn.dominio;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Paciente extends Pessoa{
 	protected String endereco;
-	protected double numeroSUS;
+	//protected double numeroSUS;
 	protected ArrayList<String> remedio = new ArrayList<String>();
 	protected Historico historicoDoPaciente;
 	protected String prioridade;
@@ -52,12 +51,12 @@ public class Paciente extends Pessoa{
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-	public double getNumeroSUS() {
-		return numeroSUS;
-	}
-	public void setNumeroSUS(double numeroSUS) {
-		this.numeroSUS = numeroSUS;
-	}
+	//public double getNumeroSUS() {
+	//	return numeroSUS;
+	//}
+	//public void setNumeroSUS(double numeroSUS) {
+	//	this.numeroSUS = numeroSUS;
+	//}
 	public ArrayList<String> getRemedio() {
 		return remedio;
 	}
@@ -103,17 +102,14 @@ public class Paciente extends Pessoa{
 		
 	}
 	
-	public Paciente() {
-		Scanner sca = new Scanner(System.in);
-		System.out.println("Nome:");
-		setNome(sca.next());
-		System.out.println("CPF:");
-		setCPF(sca.next());
-		System.out.println("Sexo:");
-		setSexo(sca.next());
-				
-		//sca.close();
+	public Paciente(String nome, String cpf, String sexo) {
+		this.nome = nome;
+		this.cpf = cpf;
+		this.sexo = sexo;
+		this.setHistoricoDoPaciente(new Historico());
+		this.setPrioridade("");
 	}
+
 	public static String calculoIdade(LocalDate dataNascimento) {
         if ((dataNascimento != null) && (LocalDate.now() != null)) {
         	String s=String.valueOf(Period.between(dataNascimento, LocalDate.now()).getYears());

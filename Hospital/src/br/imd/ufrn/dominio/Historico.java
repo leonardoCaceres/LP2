@@ -5,7 +5,26 @@ import java.util.ArrayList;
 public class Historico {
 	protected ArrayList<String> doencas = new ArrayList<String>();
 	protected ArrayList<String> alergias = new ArrayList<String>();
-	//private ArrayList<String> cirurgias = new ArrayList<String>();
+	protected ArrayList<String> cirurgias = new ArrayList<String>();
+	
+	public ArrayList<String> getDoencas() {
+		return doencas;
+	}
+	public void setDoencas(ArrayList<String> doencas) {
+		this.doencas = doencas;
+	}
+	public ArrayList<String> getAlergias() {
+		return alergias;
+	}
+	public void setAlergias(ArrayList<String> alergias) {
+		this.alergias = alergias;
+	}
+	public ArrayList<String> getCirurgias() {
+		return cirurgias;
+	}
+	public void setCirurgias(ArrayList<String> cirurgias) {
+		this.cirurgias = cirurgias;
+	}
 }
 /*
 try {

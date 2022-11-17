@@ -1,13 +1,8 @@
 package br.imd.ufrn.dominio;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Medico extends Pessoa{
 	protected int CRM;
 	protected String especialidade;
-	
-	private ArrayList<Paciente> pacientesAcompanhados = new ArrayList<Paciente>();
 	
 	public int getCRM() {
 		return CRM;
@@ -32,12 +27,6 @@ public class Medico extends Pessoa{
 	}
 	public void setSenha(int senha) {
 		this.senha = senha;
-	}
-	public ArrayList<Paciente> getPacientesAcompanhados() {
-		return pacientesAcompanhados;
-	}
-	public void setPacientesAcompanhados(ArrayList<Paciente> pacientesAcompanhados) {
-		this.pacientesAcompanhados = pacientesAcompanhados;
 	}
 	
 	public Medico(String nome, int crm, String especialidade, int login, int senha) {

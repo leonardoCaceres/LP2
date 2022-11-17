@@ -1,10 +1,7 @@
 package br.imd.ufrn.dominio;
 
-import java.util.Scanner;
-
 public class Enfermeira extends Pessoa{
 	int COREN;
-	
 	
 	public int getLogin() {
 		return login;
