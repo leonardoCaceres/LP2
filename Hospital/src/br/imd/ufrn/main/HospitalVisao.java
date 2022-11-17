@@ -138,7 +138,7 @@ public class HospitalVisao {
 			System.out.println("3.Cadastrar exames");
 			System.out.println("4.Sair");
 			System.out.println("--------------------------------------------------------");
-			
+			//TODO_LISTAR_TODOS_OS_PACIENTES
 			acao = sc.nextInt();
 			if(acao == 1) {
 				Paciente paciente = buscaPaciente(pacientes);
